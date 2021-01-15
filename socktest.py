@@ -29,8 +29,23 @@ print ("socket is listening")
 c, addr = s.accept()
 print ('Got connection from', addr )
 
-# send a thank you message to the client.
-c.sendall(b'Thank you for connecting')
+# finds the position of the mouse and sends its coordinates
+x, y = pyautogui.position()
+positionStr = str(x).rjust(4)[1:] + '$' + str(y).rjust(4)[1:]
+for i in range(0, 29-len(positionStr)):
+    positionStr += ' '
+positionStr += ']'
+
+c.sendall(positionStr.encode("ascii"))
+
+# finds the position of the mouse and sends its coordinates
+x, y = pyautogui.position()
+positionStr = str(x).rjust(4)[1:] + '$' + str(y).rjust(4)[1:]
+for i in range(0, 29-len(positionStr)):
+    positionStr += ' '
+positionStr += ']'
+
+c.sendall(positionStr.encode("ascii"))
 
 # Close the connection with the client
 c.close()
