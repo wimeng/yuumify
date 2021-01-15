@@ -12,13 +12,17 @@ port = 12345
 s.connect(('192.168.1.8', port))
 
 # receive data from the server
-for i in range(0,100):
+while True:
     message = s.recv(30)
     datums = str(message).split("$")
     x = int(datums[1])
     y = int(datums[2])
-    print (x)
-    print (y)
+    if (datums[3] == 'm'):
+        pyautogui.click(button='right')
+    elif (datums[3][0] != ' '):
+        pyautogui.press(datums[3])
+    #print (x)
+    #print (y)
     pyautogui.moveTo(x,y)
 # close the connection
 s.close()
