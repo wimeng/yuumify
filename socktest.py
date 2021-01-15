@@ -1,5 +1,7 @@
 import pyautogui
 import socket
+import time
+import keyboard
 
 # next create a socket object
 s = socket.socket()
@@ -29,15 +31,43 @@ print ("socket is listening")
 c, addr = s.accept()
 print ('Got connection from', addr )
 
-for i in range(0,100):
+while True:
     # finds the position of the mouse and sends its coordinates
     x, y = pyautogui.position()
     positionStr = '$' + str(x).rjust(4) + '$' + str(y).rjust(4) + '$'
+
+
+
+    if (keyboard.is_pressed(']')):
+        c.sendall(b'$0$0$')
+        break;
+
+    if (keyboard.is_pressed('m')):
+        positionStr += 'm$' #right click
+    if (keyboard.is_pressed('s')):
+        positionStr += 'q$' #q
+    if (keyboard.is_pressed('l')):
+        positionStr += 'w$' #w
+    if (keyboard.is_pressed('g')):
+        positionStr += 'e$' #e
+    if (keyboard.is_pressed('t')):
+        positionStr += 'r$' #ult
+    if (keyboard.is_pressed('c')):
+        positionStr += 'd$' #d
+    if (keyboard.is_pressed('v')):
+        positionStr += 'f$' #f
+    if (keyboard.is_pressed('c')):
+        positionStr += '4$' #4
+
     for i in range(0, 29-len(positionStr)):
         positionStr += ' '
     positionStr += ']'
 
+
     c.sendall(positionStr.encode("ascii"))
+    time.sleep(0.11)
+
+
 
 
 # Close the connection with the client
