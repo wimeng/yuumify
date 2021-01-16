@@ -39,14 +39,17 @@ while True:
 
 
     if (keyboard.is_pressed(']')):
-        c.sendall(b'$0$0$')
+        c.sendall(b'$0$0$]$')
         break;
 
-    if (keyboard.is_pressed('m')):
-        positionStr += 'm$' #right click
+    if (keyboard.is_pressed('n')):
+        positionStr += 'n$' #left click
+    if (keyboard.is_pressed('2')):
+        positionStr += 'z$' #right click
+
     if (keyboard.is_pressed('s')):
         positionStr += 'q$' #q
-    if (keyboard.is_pressed('l')):
+    if (keyboard.is_pressed('3')):
         positionStr += 'w$' #w
     if (keyboard.is_pressed('g')):
         positionStr += 'e$' #e
@@ -56,8 +59,13 @@ while True:
         positionStr += 'd$' #d
     if (keyboard.is_pressed('v')):
         positionStr += 'f$' #f
-    if (keyboard.is_pressed('c')):
+    if (keyboard.is_pressed('x')):
         positionStr += '4$' #4
+    if (keyboard.is_pressed('space')):
+        positionStr += 's$'
+
+    if (keyboard.is_pressed('ctrl')):
+        positionStr += 'ctrl$'
 
     for i in range(0, 29-len(positionStr)):
         positionStr += ' '
@@ -65,7 +73,7 @@ while True:
 
 
     c.sendall(positionStr.encode("ascii"))
-    time.sleep(0.11)
+    time.sleep(0.023)
 
 
 
